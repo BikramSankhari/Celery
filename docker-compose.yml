@@ -9,15 +9,11 @@ services:
     container_name: django
     build:
       context: .
-    command: python manage.py runserver 0.0.0.0:8000
+      dockerfile: Django_Docker/Dockerfile
     volumes:
       - ./:/usr/src/app/
     ports:
       - 8001:8000
-    environment:
-      - DEBUG=1
-      - SECRET_KEY=0930jd30j9jd09j09j109fj01j9f
-      - ALLOWED_HOSTS=localhost,127.0.0.1
     depends_on:
       - redis
   
@@ -25,12 +21,10 @@ services:
     container_name: celery
     build:
       context: .
+      dockerfile: Celery_Docker/Dockerfile
+    # command: celery -A dcelery worker --loglevel=INFO
     volumes:
       - ./:/usr/src/app/
-    environment:
-      - DEBUG=1
-      - SECRET_KEY=0930jd30j9jd09j09j109fj01j9f
-      - ALLOWED_HOSTS=localhost,127.0.0.1
     depends_on:
       - redis
     
