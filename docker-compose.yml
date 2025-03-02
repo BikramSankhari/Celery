@@ -27,4 +27,14 @@ services:
       - ./:/usr/src/app/
     depends_on:
       - redis
+
+  icelery:
+    container_name: icelery
+    build:
+      context: .
+      dockerfile: icelery/Dockerfile
+    volumes:
+      - ./icelery:/usr/src/app/
+    depends_on:
+      - redis
     
